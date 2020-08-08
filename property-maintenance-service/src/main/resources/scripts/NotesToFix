@@ -1,0 +1,6 @@
+a) All the default key should start with 1
+b) singleOwner=true & noOfOwner1 should have right defaut values
+c) Make sure to include query for all getall Txns to return based on tenant
+
+
+

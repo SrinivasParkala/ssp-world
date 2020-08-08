@@ -1,0 +1,228 @@
+https://localhost:1025/swagger-ui.html#/
+
+https://localhost:1025/oauth/token
+https://www.devglan.com/spring-security/spring-boot-security-oauth2-example
+
+curl --location --request POST 'https://localhost:1025/oauth/token' --header 'Authorization: Basic c3NwX2RvbWFpbjpwYXNzd29yZA==' --header 'Content-Type: application/x-www-form-urlencoded' --data-urlencode 'grant_type=password' --data-urlencode 'username=vatika@ten_01' --data-urlencode 'password=password' -k
+curl --location --request POST 'http://localhost:3001/oauth/token' --header 'Authorization: Basic c3NwX2RvbWFpbjpwYXNzd29yZA==' --header 'Content-Type: application/x-www-form-urlencoded' --data-urlencode 'grant_type=password' --data-urlencode 'client_id=ssp_domain' --data-urlencode 'username=vatika@ten_01' --data-urlencode 'password=password' -k
+
+curl --location --request POST 'https://localhost:1025/oauth/token' --header 'Authorization: Basic c3NwX2RvbWFpbjpwYXNzd29yZA==' --header 'Content-Type: application/x-www-form-urlencoded' -d 'grant_type=password' -d 'client_id=ssp_domain' -d 'username=vatika@ten_01' -d 'password=password' -k
+curl --location --request POST 'https://localhost:3001/oauth/token' --header 'Authorization: Basic c3NwX2RvbWFpbjpwYXNzd29yZA==' --header 'Content-Type: application/x-www-form-urlencoded' -d 'grant_type=password' -d 'client_id=ssp_domain' -d 'username=vatika@ten_01' -d 'password=password' -k
+
+
+curl -v -H "Access-Control-Request-Method: GET" -H "Origin: http://localhost:4200" 
+  -X OPTIONS http://localhost:8080/user
+  
+vatika@ten_01
+ssp_domain
+
+password
+
+a. Unit Spec:
+{
+  "dataType": "String",
+  "description": "Site Dimension",
+  "langId": 10,
+  "sequence": 1,
+  "statusValue": "Dimension",
+  "unitId": {
+    "keyId": 1,
+    "langId": "10",
+    "tenantId": "ten_01"
+  }
+}
+
+b. Unit
+
+{
+  "area": 1200,
+  "description": "1200 sqft",
+  "langId": 10,
+  "specData": "{\"Dimension\":\"30*40 Corner site\"}",
+  "statusValue": "30*40" ,
+  "unitId": {
+    "keyId": 1,
+    "langId": "10",
+    "tenantId": "ten_01"
+  }
+}
+
+c. Property Status
+
+{
+  "description": "Pride Commercial sites",
+  "statusValue": "SOLD",
+  "unitId": {
+    "keyId": 1,
+    "langId": "10",
+    "tenantId": "ten_01"
+  }
+}
+
+d. Title
+
+{
+  "description": "Title from Mr",
+  "statusValue": "Mr",
+ "unitId": {
+    "keyId": 1,
+    "langId": "10",
+    "tenantId": "ten_01"
+  }
+}
+
+e. Ownership Type
+
+{
+  "description": "Owned by",
+  "statusValue": "Owned",
+ "unitId": {
+    "keyId": 1,
+    "langId": "10",
+    "tenantId": "ten_01"
+  }
+}
+
+
+f. PropertyService
+
+{
+  "keyId": "520",
+  "statusType": 0,
+  "unitType": 0,
+  "value": 3000
+}
+
+g. Resident
+
+{ "keyId": "1",
+  "firstName": "Priya",
+  "lastName": "Boloor",
+  "nameTitleType": 1,
+  "resProperty": [{"keyId":"520","ownershipType": 1}]
+}
+
+
+h. Address Type
+
+{
+  "description": "Resident Address",
+  "statusValue": "Resident",
+  "unitId": {
+    "keyId": 1,
+    "langId": "10",
+    "tenantId": "ten_01"
+  }
+}
+
+i. Address
+
+{
+  "addressLine": "520",
+  "addressType": 0,
+  "district": "Anekal",
+  "postalCode": 560083,
+  "residentId": 0,
+  "state": "KA",
+  "street": "Pride Vatika"
+}
+
+j. Contact Type
+
+{
+  "description": "Email Address",
+  "statusValue": "Email",
+  "unitId": {
+    "keyId": 1,
+    "langId": "10",
+    "tenantId": "ten_01"
+  }
+}
+
+k. Contacts
+
+{
+  "contactDataValue": "shsriniv@in.ibm.com",
+  "contactType": 1,
+  "keyId": "0",
+  "residentId": 0
+}
+
+-------------------------------
+l. Periodic
+{
+  "description": "Fixed Cost not applied Periodically ",
+  "statusValue": "Fixed",
+  "unitId": {
+    "keyId": 1,
+    "langId": 10
+  }
+}
+
+m. Billing Cat Type
+{
+  "description": "Water Charges",
+  "statusValue": "Water",
+  "unitId": {
+    "keyId": 1,
+    "langId": 10
+  }
+}
+
+n. Billing Type
+
+{
+  "appliableOnce": false,
+  "billingCatType": 1,
+  "description": "Water charge under maintenance",
+  "fixed": 0,
+  "statusValue": "Water",
+  "unitId": {
+    "keyId": 1,
+    "langId": 10
+  }
+}
+
+o. Billing Category
+
+{
+  "billingCost": 0,
+  "billingType": 5,
+  "formulaId": 1,
+  "installamentTerms": 1,
+  "keyId": "5",
+  "periodicType": 1
+}
+
+p. Formula
+
+{
+  "lastUpdatedUser": "vatika",
+  "lastUpdatedDate": "2020-05-30T15:31:55.520+0000",
+  "version": 0,
+  "statusValue": "{\"1\":48,\"3\":1,\"4\":12}",
+  "description": "Maintenance cost 2015",
+  "unitId": {
+    "tenantId": "ten_01",
+    "keyId": 1,
+    "langId": 10
+  }
+}
+
+
+---------------------------------------------------------
+q. Generate Invoice 
+
+{
+  "billingCategoryBean": {
+    "keyId": "5"
+  },
+  "propertyUnit": [
+    {
+      "keyId": "520"
+    },
+    {
+      "keyId": "521"
+    }
+  ]
+}
