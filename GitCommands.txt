@@ -1,0 +1,7 @@
+git clone https://github.com/SrinivasParkala/ssp-world.git
+
+git checkout ssp_branch_aug20
+git add .
+git config --global user.email "rash.srini@gmail.com"
+git commit -m "ssp service and client"
+git push

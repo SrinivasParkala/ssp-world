@@ -31,11 +31,11 @@ class App extends Component {
     const user = AuthService.getCurrentUser();
 
     if (user) {
-      this.setState({
-        currentUser: user,
-        showModeratorBoard: user.roles.includes("ROLE_MODERATOR"),
-        showAdminBoard: user.roles.includes("ROLE_ADMIN")
-      });
+      //this.setState({
+      //  currentUser: user,
+      //  showModeratorBoard: user.roles.includes("ROLE_MODERATOR"),
+      //  showAdminBoard: user.roles.includes("ROLE_ADMIN")
+      //});
     }
   }
 
