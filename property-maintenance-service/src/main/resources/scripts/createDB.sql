@@ -22,13 +22,3 @@ create table t_bill_catergory (key_id integer not null, tenant_id varchar(255) n
 create table t_bill_formula (key_id integer not null, lang_id integer not null, tenant_id varchar(255) not null, last_updated_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP, last_updated_user varchar(255) not null, version integer not null, description varchar(255), status_value varchar(255) not null, primary key (key_id, lang_id, tenant_id));
 
 create table users (id integer not null, username varchar(45) not null, password varchar(70) not null, primary key (id));
-
-
-
-
-
-create table report (sub_id integer not null, tc_name varchar(45) not null, tps float not null, pdelay float not null, id_wait float not null, res_wait float not null, run_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
-
-insert into report(sub_id,tc_name,tps,pdelay,id_wait,res_wait) values (1,'AE_Performance',125,2.5,1.2,1.1);
-insert into report(sub_id,tc_name,tps,pdelay,id_wait,res_wait) values (2,'AE_Performance',135,2.8,1.4,1.4);
-insert into report(sub_id,tc_name,tps,pdelay,id_wait,res_wait) values (3,'AE_Performance',115,2.9,1.3,1.5);

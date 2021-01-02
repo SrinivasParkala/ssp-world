@@ -1,15 +1,15 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: tomcat-service
+  name: mysql-service
   namespace: {{ .Release.Namespace }}
 spec:
   type: NodePort      
   selector:
-    server: tomcat
+    db: mysql
   ports:
   - protocol: TCP
-    port: {{ .Values.tomcat.port }}
-    targetPort: {{ .Values.tomcat.port }}
-    nodePort: 30007
+    port: {{ .Values.mysql.port }}
+    targetPort: {{ .Values.mysql.port }}
+    nodePort: 30008
 

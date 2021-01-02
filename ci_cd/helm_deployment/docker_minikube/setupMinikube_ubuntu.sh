@@ -37,6 +37,6 @@ sudo mv ./kubectl /usr/local/bin/kubectl
 
 kubectl version -o json
 
-minikube start --vm-driver=none --kubernetes-version v1.15.4
+minikube start --vm-driver=none --kubernetes-version v1.15.5
 
 Note: Follow this link if docker info command shows error - https://stackoverflow.com/questions/48957195/how-to-fix-docker-got-permission-denied-issue
