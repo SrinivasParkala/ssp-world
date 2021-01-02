@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: ssp-pv-data
+  labels:
+    type: local_data
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 90Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/home/srinivas/MyData/containerstore/ssp_data/data"
+

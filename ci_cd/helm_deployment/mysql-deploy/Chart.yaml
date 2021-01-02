@@ -1,0 +1,8 @@
+apiVersion: v1
+appVersion: 1.0.0
+description: Deploy MySql
+keywords:
+- amd64
+kubeVersion: '>=1.9.0'
+name: mysql-deploy
+version: 0.1.001

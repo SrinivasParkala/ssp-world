@@ -1,0 +1,15 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: tomcat-service
+  namespace: {{ .Release.Namespace }}
+spec:
+  type: NodePort      
+  selector:
+    server: tomcat
+  ports:
+  - protocol: TCP
+    port: {{ .Values.tomcat.port }}
+    targetPort: 8080
+    nodePort: 30007
+
