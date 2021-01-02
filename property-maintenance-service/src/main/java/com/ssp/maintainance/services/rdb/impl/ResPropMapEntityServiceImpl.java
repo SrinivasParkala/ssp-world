@@ -34,7 +34,7 @@ public class ResPropMapEntityServiceImpl extends AbstractService implements ResP
 		preExecute(control, "getAllResPropMapEntities");
 		
 		List<ResPropMapEntity> units = new ArrayList<>();
-		Iterator<ResPropMapEntity> iterator = resPropMapEntityRepository.getAllPropertyByResidentId(tentantId, residentId).iterator();
+		Iterator<ResPropMapEntity> iterator = resPropMapEntityRepository.getAllPropertyByResidentId(tentantId, Integer.valueOf(residentId)).iterator();
 		while(iterator.hasNext()){
 			units.add(iterator.next());
 		}

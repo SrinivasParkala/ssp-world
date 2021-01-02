@@ -1,61 +1,81 @@
 import React, { Component } from "react";
 
-import UserService from "../services/user.service";
 import BootstrapTable from 'react-bootstrap-table-next';
 import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
 import paginationFactory from 'react-bootstrap-table2-paginator';
-
+import SspService from "../services/ssp.service";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 const { SearchBar } = Search;
-const colFormatter = (cell, row) => {
-	return (<div><a href={cell}>{cell}</a></div>)
-}
+
 
 function linkFormatter(cell, row) {
   return (
-		  <div><a href="/userdetail">{cell}</a></div>
+		  <div>
+		  	<Link to={{
+				  		pathname:'/userdetail/',	
+				  		userProps:{
+				  			residentId:	row.residentId
+				  		}
+			  		}} >{cell}</Link>
+		  	</div>  
   );
 }
 
 export default class Home extends Component {
 	
- 
-  
   constructor(props) {
     super(props);
-
+    
     this.state = {
-      content: "",
-      products: [ {'id':'0','name':'item name 0','price':'2450'},{'id':'1','name':'item name 1','price':'2500'},{'id':'2','name':'item name 2','price':'3400'} ],
-      columns: [{
-    	  dataField: 'id',
-    	  text: 'Product ID'
-    	}, {
+      error: "",
+      title: "Pride Vatika Residents",
+      residents: [ {'id':'0','name':'item name 0','price':'2450'},{'id':'1','name':'item name 1','price':'2500'},{'id':'2','name':'item name 2','price':'3400'} ],
+      columns: [
+    	{
+    		dataField: 'residentId',
+        	hidden: true
+        },
+    	{
     	  dataField: 'name',
-    	  text: 'Product Name',
+    	  text: 'Name'
+    	}, {
+    	  dataField: 'unitNo',
+    	  text: 'Site No',
     	  sort: true,
     	  formatter: linkFormatter
-    	}, {
-    	  dataField: 'price',
-    	  text: 'Product Price',
+    	}, 
+    	{
+    	  dataField: 'unitDescription',
+    	  text: 'Dimension',
+    	  sort: true
+    	},
+    	{
+    	  dataField: 'mobileNo',
+    	  text: 'Mobile',
+    	  sort: true
+    	},
+    	{
+    	  dataField: 'email',
+    	  text: 'Email',
     	  sort: true
     	}],
-       defaultSorted: [{
-    		  dataField: 'price',
+        defaultSorted: [{
+    		  dataField: 'unitNo',
     		  order: 'desc'
-    		}]
+    	}]
     };
   }
 
   componentDidMount() {
-    UserService.getPublicContent().then(
+	  SspService.getAllResidents().then(
       response => {
         this.setState({
-          content: response.data
+        	residents: response.data
         });
       },
       error => {
         this.setState({
-          content:
+        	error:
             (error.response && error.response.data) ||
             error.message ||
             error.toString()
@@ -68,19 +88,19 @@ export default class Home extends Component {
     return (
       <div className="container">
         <header className="jumbotron">
-          <h3>{this.state.content}</h3>
+          <h3>{this.state.title}</h3>
         </header>
         <div>
         <ToolkitProvider
         keyField="id"
-        data={ this.state.products }
+        data={ this.state.residents }
         columns={ this.state.columns }
         search
       >
         {
           props => (
             <div>
-              <h3>Search on Name, Mobile, Site No</h3>
+              <h3>Search on Name, Mobile, Site No </h3>
               <SearchBar { ...props.searchProps } />
               <hr />
               <BootstrapTable

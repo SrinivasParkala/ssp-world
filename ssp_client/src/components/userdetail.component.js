@@ -8,17 +8,23 @@ import cellEditFactory, { Type } from 'react-bootstrap-table2-editor';
 import Accordion from 'react-bootstrap/Accordion';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
+import SspService from "../services/ssp.service";
+const qs = require('qs');
 
 export default class UserDetail extends Component {
 
 	constructor(props) {
 	    super(props);
+	    
+	    console.log("Resident Id:"+this.props.location.userProps.residentId);
+	    
 	    this.onChangeButton = this.onChangeButton.bind(this);
 	    this.onTextChange = this.onTextChange.bind(this);
 	    
 	    this.state = {
 	      edit: 2,
 	      disabled : true,
+	      residents :{},
 	      contacts: [ {'id':'0','type':'E-mail','value':'sshettigar@gmail.com'},{'id':'1','type':'Mobile','value':'9945440831'}],
 	      selectRow: {
 	    		  mode: 'radio',
@@ -86,6 +92,28 @@ export default class UserDetail extends Component {
 		}
 	}
 	
+	componentDidMount() {
+		  SspService.getAllResidentDetais(this.props.location.userProps.residentId).then(
+	      response => {
+	        var residentDetails = SspService.parseResidentDetails(response.data);
+	        console.log('details:'+qs.stringify(residentDetails));
+	        this.setState({
+	        	residents: residentDetails,
+	        	contacts:residentDetails.contacts,
+	        	sites:residentDetails.residents
+	        });
+	      },
+	      error => {
+	        this.setState({
+	        	error:
+	            (error.response && error.response.data) ||
+	            error.message ||
+	            error.toString()
+	        });
+	      }
+	    );
+	}
+	
 	render() {
 	    return (
     		<div class="panel panel-default">
@@ -99,44 +127,44 @@ export default class UserDetail extends Component {
 	    		   
 	    		    <div class="form-group col-md-6">
 	    		      <label for="inputEmail4">First Name</label>
-	    		      { this.state.edit < 2 && <input type="text" onChange={this.onTextChange} class="form-control" id="fname"/>}
-	    		      { this.state.edit > 1 && <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="Srinivas"/>}
+	    		      { this.state.edit < 2 && <input type="text" onChange={this.onTextChange} class="form-control" id="fname" value={this.state.residents.fname}/>}
+	    		      { this.state.edit > 1 && <input type="text" readonly class="form-control-plaintext" id="fname" value={this.state.residents.fname}/>}
 	    		    </div>
 	    		    
 	    		    <div class="form-group col-md-6">
 	    		      <label for="inputPassword4">Last Name</label>
-	    		      { this.state.edit < 2 && <input type="text" class="form-control" id="lname"/> }
-	    		      { this.state.edit > 1 && <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="Shettigar"/>}	  
+	    		      { this.state.edit < 2 && <input type="text" class="form-control" id="lname" value={this.state.residents.lname}/> }
+	    		      { this.state.edit > 1 && <input type="text" readonly class="form-control-plaintext" id="lname" value={this.state.residents.lname}/>}	  
 	    		    </div>
 	    		    
 	    		  </div>
     		  
 	    		  <div class="form-group">
 	    		    <label for="inputAddress">Address Line One</label>
-	    		    { this.state.edit < 2 && <input type="text" class="form-control" id="address1" placeholder="1234 Main St"/> }
-	    		    { this.state.edit > 1 && <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="#520"/>}
+	    		    { this.state.edit < 2 && <input type="text" class="form-control" id="address1" placeholder="1234 Main St" value={this.state.residents.addressLine}/> }
+	    		    { this.state.edit > 1 && <input type="text" readonly class="form-control-plaintext" id="address1" value={this.state.residents.addressLine}/>}
 	    		  </div>
 	    		  <div class="form-group">
 	    		    <label for="inputAddress2">Address Line Two</label>
-	    		    { this.state.edit < 2 && <input type="text" class="form-control" id="address2" placeholder="Apartment, studio, or floor"/>}
-	    		    { this.state.edit > 1 && <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="Jigani"/>}
+	    		    { this.state.edit < 2 && <input type="text" class="form-control" id="address2" placeholder="Apartment, studio, or floor" value={this.state.residents.street}/>}
+	    		    { this.state.edit > 1 && <input type="text" readonly class="form-control-plaintext" id="address2" value={this.state.residents.street}/>}
 	    		  </div>
 	    		  
 	    		  <div class="form-row">
 	    		    <div class="form-group col-md-6">
 	    		      <label for="inputCity">City</label>
-	    		      { this.state.edit < 2 && <input type="text" class="form-control" id="city"/> }
-	    		      { this.state.edit > 1 && <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="Bangalore"/>}
+	    		      { this.state.edit < 2 && <input type="text" class="form-control" id="city" value={this.state.residents.district}/> }
+	    		      { this.state.edit > 1 && <input type="text" readonly class="form-control-plaintext" id="city" value={this.state.residents.district}/>}
 	    		    </div>
 	    		    <div class="form-group col-md-4">
 	    		      <label for="inputCity">State</label>
-	    		      { this.state.edit < 2 && <input type="text" class="form-control" id="state"/>}
-	    		      { this.state.edit > 1 && <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="Karnataka"/>}
+	    		      { this.state.edit < 2 && <input type="text" class="form-control" id="state" value={this.state.residents.state}/>}
+	    		      { this.state.edit > 1 && <input type="text" readonly class="form-control-plaintext" id="state" value={this.state.residents.state}/>}
 	    		    </div>
 	    		    <div class="form-group col-md-2">
 	    		      <label for="inputZip">Zip</label>
-	    		      { this.state.edit < 2 && <input type="text" class="form-control" id="zip"/>}
-	    		      { this.state.edit > 1 && <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="560083"/>}
+	    		      { this.state.edit < 2 && <input type="text" class="form-control" id="zip" value={this.state.residents.postalCode}/>}
+	    		      { this.state.edit > 1 && <input type="text" readonly class="form-control-plaintext" id="zip" value={this.state.residents.postalCode}/>}
 	    		    </div>
 	    		  </div>
 	    		  { this.state.edit < 2 && <button type="submit" onClick={this.onChangeButton} disabled={this.state.disabled} class="btn btn-primary">Save</button>}

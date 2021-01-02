@@ -10,6 +10,9 @@ curl --location --request POST 'https://localhost:1025/oauth/token' --header 'Au
 curl --location --request POST 'https://localhost:3001/oauth/token' --header 'Authorization: Basic c3NwX2RvbWFpbjpwYXNzd29yZA==' --header 'Content-Type: application/x-www-form-urlencoded' -d 'grant_type=password' -d 'client_id=ssp_domain' -d 'username=vatika@ten_01' -d 'password=password' -k
 
 
+curl --location --request POST 'https://localhost:1025/oauth/token' --header 'Authorization: Basic c3NwX2RvbWFpbjpwYXNzd29yZA==' --header 'Content-Type: application/x-www-form-urlencoded' -d 'grant_type=password' -d 'username=vatika@ten_01' -d 'password=password' -k
+
+
 curl -v -H "Access-Control-Request-Method: GET" -H "Origin: http://localhost:4200" 
   -X OPTIONS http://localhost:8080/user
   
@@ -226,3 +229,6 @@ q. Generate Invoice
     }
   ]
 }
+
+
+select * from t_res_prop_map respropmap0_ where lower(respropmap0_.tenant_id)=lower('ten_01') and respropmap0_.prop_id=0

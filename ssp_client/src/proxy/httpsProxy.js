@@ -20,9 +20,45 @@ proxyApp.use(cors())
 proxyApp.use(bodyParser.json());
 proxyApp.use(bodyParser.urlencoded({extended: true}));
 
+proxyApp.use('/ssp/*', (req, res) => {
+	
+    var agent = httpsAgent(options);
+  
+	var options = {
+	  hostname: 'localhost',
+	  port: 1025,
+	  path: '/ssp'+req.header('Path'),
+	  method: req.method,
+	  agent: agent,
+	  rejectUnauthorized: false,
+	  headers: {
+		  'Content-Type' : 'application/json',
+		  'Authorization': req.header('Authorization')
+	  }
+	}
+	
+	const data = qs.stringify(req.body);
+	const reqhttp = https.request(options, (reshttp) => {
+	  reshttp.on('data', (d) => {
+		
+		res.writeHead(reshttp.statusCode, reshttp.headers);	
+		reshttp.pipe(res);
+		res.end(d);
+	  });
+	})
+
+	reqhttp.on('error', (error) => {
+	  res.writeHead(500,req.method+' call to /ssp'+req.header('Path')+' failed');
+	  res.end(qs.stringify(error));
+	})
+
+	reqhttp.write(data);
+	reqhttp.end();
+});
+
 proxyApp.use('/oauth/*', (req, res) => {
     var agent = httpsAgent(options);
-    
+   
 	var options = {
 	  hostname: 'localhost',
 	  port: 1025,
@@ -39,6 +75,7 @@ proxyApp.use('/oauth/*', (req, res) => {
 	const data = qs.stringify(req.body);
 	const reqhttp = https.request(options, (reshttp) => {
 	  reshttp.on('data', (d) => {
+		
 		res.writeHead(reshttp.statusCode, reshttp.headers);	
 		reshttp.pipe(res);
 		res.end(d);
