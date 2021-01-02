@@ -10,12 +10,24 @@ Git ID: rash.srini@gmail.com
 Git password: welcome2xxx
 
 1. Setup Docker, minikube & helm3 , see script in docker_setup folder
-2. Login to Docker, this will create /root/.docker/config.json file
+	a. Follow steps in ci_cd/helm_deployment/docker_minikube/setupMinikube_ubuntu.sh to setup Docker and Minikue
+	b. Follow below commands to setup Helm 3
+	
+		wget https://get.helm.sh/helm-v3.4.2-linux-amd64.tar.gz
+		tar -xzvf helm-v3.4.2-linux-amd64.tar.gz
+		sudo mv linux-amd64/helm /usr/local/bin/helm
+
+2. Login to Docker, this will create /home/<user>/.docker/config.json file
+   sudo docker login
+   
 3. Create docker id secret
-    kubectl create secret generic regcred \
-    --from-file=.dockerconfigjson=/root/.docker/config.json \
+    sudo kubectl create secret generic regcred \
+    --from-file=.dockerconfigjson=/home/<user>/.docker/config.json \
     --type=kubernetes.io/dockerconfigjson
-4. Run ./bin/install.sh , to install Tomcat and Mysql
+    
+4. create name space
+   kubectl create namespace ssp
+5. Run ./bin/install.sh , to install Tomcat and Mysql
 
 
 Git Clone Steps
@@ -29,4 +41,3 @@ git commit -m "ssp service and client"
 git push
 
 git user: rash.srini@gmail.com
-git password: welcome2ssp
