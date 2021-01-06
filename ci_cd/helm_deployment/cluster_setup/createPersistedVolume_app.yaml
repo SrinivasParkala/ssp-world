@@ -11,5 +11,5 @@ spec:
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: "/home/srinivas/MyData/containerstore/ssp_data/app"
+    path: "/home/srinivas/mydata/containerstore/ssp_data/app"
 

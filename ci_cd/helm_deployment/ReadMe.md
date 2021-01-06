@@ -10,6 +10,7 @@ Git ID: rash.srini@gmail.com
 Git password: welcome2xxx
 
 1. Setup Docker, minikube & helm3 , see script in docker_setup folder
+
 	a. Follow steps in ci_cd/helm_deployment/docker_minikube/setupMinikube_ubuntu.sh to setup Docker and Minikue
 	b. Follow below commands to setup Helm 3
 	
