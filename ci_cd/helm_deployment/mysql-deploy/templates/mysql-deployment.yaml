@@ -18,6 +18,8 @@ spec:
         db: mysql
         tier: backend
     spec:
+      hostname: mysql-host 
+      subdomain: backend
       containers:
       - image: {{ .Values.mysql.image }}:{{ .Values.mysql.imageTag }}
         name: {{ .Values.mysql.image }}

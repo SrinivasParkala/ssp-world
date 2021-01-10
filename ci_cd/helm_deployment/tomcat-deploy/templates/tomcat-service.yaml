@@ -12,4 +12,10 @@ spec:
     port: {{ .Values.tomcat.port }}
     targetPort: {{ .Values.tomcat.port }}
     nodePort: 30007
+    name: {{ .Values.tomcat.image }} 
+  - protocol: TCP
+    port: 1025
+    targetPort: 1025
+    nodePort: 30006
+    name: app-port 
 

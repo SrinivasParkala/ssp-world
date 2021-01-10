@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
+import java.util.Properties;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -60,6 +61,12 @@ public class DemoApplication extends SpringBootServletInitializer {
 
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+		logger.info("Loading Application:");
+		logger.info("config properties:"+System.getenv().get("SPRING_CONFIG_LOCATION"));
+		
+		Properties prop = new Properties();
+		prop.setProperty("spring.config.location", System.getenv().get("SPRING_CONFIG_LOCATION"));
+		application.application().setDefaultProperties(prop);
 		return application.sources(DemoApplication.class);
 	}
 

@@ -42,3 +42,9 @@ git commit -m "ssp service and client"
 git push
 
 git user: rash.srini@gmail.com
+6. Create sspdb my sql database
+7. Create mysql user ssp_db_admin and give required permission
+8. Create required table by running createDB.sql
+9. insert table users with user and password
+
+

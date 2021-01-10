@@ -4,6 +4,19 @@ metadata:
   name: tomcat-configuration
   namespace: {{ .Release.Namespace }}
 data:
+  manager.xml: |
+    <Context path="/manager"
+        docBase="${catalina.home}/webapps/manager"
+        debug="0"
+        privileged="true">
+
+    <ResourceLink name="users"
+            global="UserDatabase"
+            type="org.apache.catalina.UserDatabase"/>
+
+    <Valve className="org.apache.catalina.valves.RemoteAddrValve"
+            allow="^.*$"/>
+    </Context>
   tomcat-users.xml: |
     <?xml version="1.0" encoding="UTF-8"?>
     <!--
@@ -48,4 +61,7 @@ data:
       <user username="both" password="<must-be-changed>" roles="tomcat,role1"/>
       <user username="role1" password="<must-be-changed>" roles="role1"/>
     -->
+     <role rolename="admin-gui"/>
+     <role rolename="manager-gui"/>
+     <user username="tomcat" password="s3cret" roles="admin-gui,manager-gui"/>
     </tomcat-users>

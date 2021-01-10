@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: springboot-server
+  namespace: {{ .Release.Namespace }}
+  labels:
+    server: springboot
+spec:
+  selector:
+    matchLabels:
+      server: springboot
+      tier: server
+  strategy:
+    type: {{ .Values.springboot.strategy }}
+  template:
+    metadata:
+      labels:
+        server: springboot
+        tier: server
+    spec:
+      containers:
+      - image: {{ .Values.springboot.image }}:{{ .Values.springboot.imageTag }}
+        name: {{ .Values.springboot.image }}
+        resources:
+           requests:
+             cpu: 500m
+             memory: 1Gi
+           limits:
+             cpu: 1
+             memory: 3Gi
+        env:
+        - name: SPRING_BOOT_MAIN_CLASS
+          value: "com.ssp.maintainance.DemoApplication"
+        ports:
+        - containerPort: {{ .Values.springboot.port }}
+          name: {{ .Values.springboot.image }}
+        volumeMounts:
+        - name: springboot-persistent-storage
+          mountPath: /app
+      volumes:
+      - name: springboot-persistent-storage
+        persistentVolumeClaim:
+          claimName: springboot-pv-claim
+      imagePullSecrets:
+      - name: regcred
