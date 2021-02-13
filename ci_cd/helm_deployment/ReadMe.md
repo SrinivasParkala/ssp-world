@@ -1,3 +1,25 @@
+Steps to start working
+
+1. Start minikube from /ci_cd/helm_deployment/bin/startMinikube.sh
+2. https://localhost:30005/swagger-ui.html#/ 
+3. cd /ssp-world/ssp_client
+
+	npm start
+	This will open the application at http://localhost:3000/
+	
+4. Start Proxy Server
+
+	cd /ssp_client/src/proxy
+	node httpsProxy.js
+	
+5. https://localhost:3000/
+
+	Tenant:ssp_domain
+	Username:vatika@ten_01
+	Password:password
+-----------------------------------------------------------------
+
+
 K8 Tutorial-> https://kubernetes.io/docs/home/
 Docker Tutorial -> https://docs.docker.com/get-started/
 

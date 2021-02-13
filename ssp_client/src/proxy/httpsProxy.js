@@ -10,7 +10,7 @@ let cors = require('cors')
 
 
 const options = {
-  pfx: fs.readFileSync('/home/lenovo/user/srini/workspace/microservices/property-maintenance-service/src/test/keystore.p12'),
+  pfx: fs.readFileSync('/home/srinivas/mydata/workspace/ssp-world/property-maintenance-service/src/test/keystore.p12'),
   passphrase: 'welcome2ss'
 };
 
@@ -26,7 +26,7 @@ proxyApp.use('/ssp/*', (req, res) => {
   
 	var options = {
 	  hostname: 'localhost',
-	  port: 1025,
+	  port: 30005,
 	  path: '/ssp'+req.header('Path'),
 	  method: req.method,
 	  agent: agent,
@@ -61,7 +61,7 @@ proxyApp.use('/oauth/*', (req, res) => {
    
 	var options = {
 	  hostname: 'localhost',
-	  port: 1025,
+	  port: 30005,
 	  path: '/oauth/token',
 	  method: 'POST',
 	  agent: agent,

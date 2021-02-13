@@ -11,5 +11,6 @@ $ docker push <hub-user>/<repo-name>:<tag>
 
 1. cd <Path>/ci_cd/helm_deployment/spring-boot/docker
 2. docker build -t 9945440831/bulletinboard:springbootv2 .
-3. docker tag 9b524c89216e 9945440831/bulletinboard:springbootv2
-4. ocker push 9945440831/bulletinboard:springbootv2
+3. docker tag 6f22bb90171e 9945440831/bulletinboard:springbootv2
+4. docker tag 6f22bb90171e springboot:v2
+5. docker push 9945440831/bulletinboard:springbootv2
