@@ -21,10 +21,12 @@ export default class Login extends Component {
     this.handleLogin = this.handleLogin.bind(this);
     this.onChangeUsername = this.onChangeUsername.bind(this);
     this.onChangePassword = this.onChangePassword.bind(this);
+    this.onChangeTenant = this.onChangeTenant.bind(this);
 
     this.state = {
       username: "",
       password: "",
+      tenant: "",
       loading: false,
       message: ""
     };
@@ -42,6 +44,12 @@ export default class Login extends Component {
     });
   }
 
+  onChangeTenant(e) {
+    this.setState({
+    	tenant: e.target.value
+    });
+  }
+  
   handleLogin(e) {
     e.preventDefault();
 
@@ -53,9 +61,9 @@ export default class Login extends Component {
     this.form.validateAll();
 
     if (this.checkBtn.context._errors.length === 0) {
-      AuthService.login(this.state.username, this.state.password).then(
+      AuthService.login(this.state.username, this.state.password,this.state.tenant ).then(
         () => {
-          this.props.history.push("/profile");
+          this.props.history.push("/home");
           window.location.reload();
         },
         error => {
@@ -95,6 +103,18 @@ export default class Login extends Component {
               this.form = c;
             }}
           >
+	        <div className="form-group">
+	          <label htmlFor="tenant">Tenant</label>
+	          <Input
+	            type="text"
+	            className="form-control"
+	            name="tenant"
+	            value={this.state.tenant}
+	            onChange={this.onChangeTenant}
+	            validations={[required]}
+	          />
+	        </div>
+	          
             <div className="form-group">
               <label htmlFor="username">Username</label>
               <Input

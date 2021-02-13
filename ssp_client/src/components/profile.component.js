@@ -22,22 +22,22 @@ export default class Profile extends Component {
         </header>
         <p>
           <strong>Token:</strong>{" "}
-          {currentUser.accessToken.substring(0, 20)} ...{" "}
-          {currentUser.accessToken.substr(currentUser.accessToken.length - 20)}
+          {console.log('hi->'+currentUser.access_token)}
+          {currentUser.access_token}
         </p>
         <p>
           <strong>Id:</strong>{" "}
-          {currentUser.id}
+          {currentUser.token_type}
         </p>
         <p>
           <strong>Email:</strong>{" "}
-          {currentUser.email}
+          {currentUser.expires_in}
         </p>
         <strong>Authorities:</strong>
-        <ul>
+        /*<ul>
           {currentUser.roles &&
             currentUser.roles.map((role, index) => <li key={index}>{role}</li>)}
-        </ul>
+        </ul>*/
       </div>
     );
   }

@@ -23,9 +23,12 @@ public class OAuth2Config extends AuthorizationServerConfigurerAdapter {
 	   
    @Value("${user.oauth.clientId}")
    private String clientid;
+   
    @Value("${user.oauth.clientSecret}")
    private String clientSecret;
 
+   @Value("${user.oauth.redirectionUrl}")
+   private String redirectionUrl;
    
    @Autowired
    @Qualifier("authenticationManagerBean")
@@ -57,7 +60,7 @@ public class OAuth2Config extends AuthorizationServerConfigurerAdapter {
    
    @Override
    public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-      clients.inMemory().withClient(clientid).secret(clientSecret).scopes("read", "write").redirectUris("https://localhost:1025/login").
+      clients.inMemory().withClient(clientid).secret(clientSecret).scopes("read", "write").redirectUris(redirectionUrl).
          authorizedGrantTypes("password", "authorization_code", "refresh_token").accessTokenValiditySeconds(20000)
          .refreshTokenValiditySeconds(20000);
    }

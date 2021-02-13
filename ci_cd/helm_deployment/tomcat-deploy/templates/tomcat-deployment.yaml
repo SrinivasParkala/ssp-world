@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tomcat-server
+  namespace: {{ .Release.Namespace }}
+  labels:
+    server: tomcat
+spec:
+  selector:
+    matchLabels:
+      server: tomcat
+      tier: server
+  strategy:
+    type: {{ .Values.tomcat.strategy }}
+  template:
+    metadata:
+      labels:
+        server: tomcat
+        tier: server
+    spec:
+      containers:
+      - image: {{ .Values.tomcat.image }}:{{ .Values.tomcat.imageTag }}
+        name: {{ .Values.tomcat.image }}
+        resources:
+           requests:
+             cpu: 500m
+             memory: 1Gi
+           limits:
+             cpu: 1
+             memory: 3Gi
+        env:
+        - name: SPRING_CONFIG_LOCATION
+          value: "/usr/local/config/spring-boot-properties/spring-boot-properties/application.properties"
+        ports:
+        - containerPort: {{ .Values.tomcat.port }}
+          name: {{ .Values.tomcat.image }}
+        - containerPort: 1025
+          name: app-port
+        volumeMounts:
+        - name: tomcat-persistent-storage
+          mountPath: /usr/local/tomcat/webapps
+        - name: tomcat-config-persistent-storage
+          mountPath: /usr/local/config
+        - name: tomcat-configuration
+          mountPath: /usr/local/tomcat/conf/tomcat-users.xml
+          subPath: tomcat-users.xml
+        - name: tomcat-configuration
+          mountPath: /usr/local/tomcat/conf/Catalina/localhost/manager.xml 
+          subPath: manager.xml
+      volumes:
+      - name: tomcat-persistent-storage
+        persistentVolumeClaim:
+          claimName: tomcat-pv-claim
+      - name: tomcat-config-persistent-storage
+        persistentVolumeClaim:
+          claimName: tomcat-pv-config-claim
+      - name: tomcat-configuration
+        configMap:
+          name: tomcat-configuration
+      imagePullSecrets:
+      - name: regcred

@@ -9,7 +9,7 @@
 
 	<appender name="FILE"
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>E:\\users\\srini\\workspace\\microservices\\property-maintenance-service\\src\\test\\console.log</file>
+		<file>\\usr\\local\\tomcat\\logs\\console.log</file>
         <append>true</append>
         <encoder>
             <pattern>%-4relative [%thread] %-5level %logger{35} - %msg %n</pattern>
@@ -18,7 +18,7 @@
 	
 	<appender name="REG_FILE"
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>E:\\users\\srini\\workspace\\microservices\\property-maintenance-service\\src\\test\\generallog.log</file>
+		<file>\\usr\\local\\tomcat\\logs\\generallog.log</file>
         <append>true</append>
         <encoder>
             <pattern>%-4relative [%thread] %-5level %logger{35} - %msg %n</pattern>
@@ -27,7 +27,7 @@
 
 	<appender name="PERF_FILE"
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>E:\\users\\srini\\workspace\\microservices\\property-maintenance-service\\src\\test\\perflog.log</file>
+		<file>\\usr\\local\\tomcat\\logs\\perflog.log</file>
         <append>true</append>
         <encoder>
             <pattern>%-4relative [%thread] %-5level %logger{35} - %msg %n</pattern>
@@ -42,7 +42,7 @@
 		<appender-ref ref="REG_FILE" />
 	</logger>
 	
-	<root level="INFO">
+	<root level="ALL">
 		<appender-ref ref="FILE" />
 		<appender-ref ref="STDOUT" />
 	</root>

@@ -1,0 +1,10 @@
+global:
+  sharedVolumeWLPConfiguration:
+    properties:
+      storageSize: "5Gi" # storage size in Persistent Volume Claim (PVC)
+
+tomcat:
+  image: tomcat
+  imageTag: 10.0.0-jdk15-openjdk-oraclelinux7
+  port: 8080
+  strategy: Recreate

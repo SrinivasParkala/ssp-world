@@ -1,0 +1,10 @@
+global:
+  sharedVolumeSpringConfiguration:
+    properties:
+      storageSize: "5Gi" # storage size in Persistent Volume Claim (PVC)
+
+springboot:
+  image: springboot
+  imageTag: v2
+  port: 1025
+  strategy: Recreate
