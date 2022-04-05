@@ -1,0 +1,5 @@
+create table roles (id integer not null, tenant_id varchar(255) not null, last_updated_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP, last_updated_user varchar(255) not null, version integer not null, role varchar(255), primary key (id, tenant_id))
+create table user (id integer not null, tenant_id varchar(255) not null, last_updated_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP, last_updated_user varchar(255) not null, version integer not null, expired smallint not null, locked smallint not null, password varchar(255), password_expired smallint not null, user_name varchar(255), primary key (id, tenant_id))
+create table userrole (user_id integer not null, tenant_id varchar(255) not null, role_id integer not null, primary key (user_id, tenant_id, role_id))
+alter table userrole add constraint FKg4ym4tkc2t8v7ooo5d4f260ti foreign key (role_id, tenant_id) references roles
+alter table userrole add constraint FK7o9b2wi46yu9lkbm1p3cq4v11 foreign key (user_id, tenant_id) references user
