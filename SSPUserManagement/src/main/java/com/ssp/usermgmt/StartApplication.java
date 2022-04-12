@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
@@ -56,9 +57,14 @@ public class StartApplication extends SpringBootServletInitializer {
 
 	@Value("${user.oauth.oauthUrl}")
 	private String oauthUrl;
-	
-	 @Value("${user.oauth.roles}")
-   private String outhRoles;
+
+	@Value("${user.oauth.roles}")
+	private String outhRoles;
+
+	@Override
+	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+		return application.sources(StartApplication.class);
+	}
 
 	public static void main(String[] args) {
 		logger.info("this is a info message");
@@ -75,33 +81,26 @@ public class StartApplication extends SpringBootServletInitializer {
 	@Bean
 	public Docket maintainanceApi() {
 		/***
-		 * return new Docket(DocumentationType.SWAGGER_2) .select()
-		 * .apis(RequestHandlerSelectors .basePackage("com.ssp.maintainance")).build();
+		 * return new Docket(DocumentationType.SWAGGER_2) .select() .apis(RequestHandlerSelectors .basePackage("com.ssp.maintainance")).build();
 		 */
 		List<ResponseMessage> list = new java.util.ArrayList<>();
-		list.add(new ResponseMessageBuilder().code(500).message("500 message").responseModel(new ModelRef("Result"))
-				.build());
-		list.add(new ResponseMessageBuilder().code(401).message("Unauthorized").responseModel(new ModelRef("Result"))
-				.build());
-		list.add(new ResponseMessageBuilder().code(406).message("Not Acceptable").responseModel(new ModelRef("Result"))
-				.build());
+		list.add(new ResponseMessageBuilder().code(500).message("500 message").responseModel(new ModelRef("Result")).build());
+		list.add(new ResponseMessageBuilder().code(401).message("Unauthorized").responseModel(new ModelRef("Result")).build());
+		list.add(new ResponseMessageBuilder().code(406).message("Not Acceptable").responseModel(new ModelRef("Result")).build());
 
-		return new Docket(DocumentationType.SWAGGER_2).select().apis(RequestHandlerSelectors.any())
-				.paths(PathSelectors.ant("/ssp/**")).build()
-				.securitySchemes(Collections.singletonList(securitySchema()))
-				.securityContexts(Collections.singletonList(securityContext())).pathMapping("/")
-				.useDefaultResponseMessages(false).apiInfo(apiInfo()).globalResponseMessage(RequestMethod.GET, list)
-				.globalResponseMessage(RequestMethod.POST, list);
+		return new Docket(DocumentationType.SWAGGER_2).select().apis(RequestHandlerSelectors.any()).paths(PathSelectors.ant("/ssp/**")).build()
+				.securitySchemes(Collections.singletonList(securitySchema())).securityContexts(Collections.singletonList(securityContext())).pathMapping("/")
+				.useDefaultResponseMessages(false).apiInfo(apiInfo()).globalResponseMessage(RequestMethod.GET, list).globalResponseMessage(RequestMethod.POST, list);
 	}
 
 	private OAuth securitySchema() {
 
 		List<AuthorizationScope> authorizationScopeList = new ArrayList();
-		
+
 		String[] roles = outhRoles.split(",");
-		
-		for(String role : roles) {
-			authorizationScopeList.add(new AuthorizationScope(role, role+" all"));
+
+		for (String role : roles) {
+			authorizationScopeList.add(new AuthorizationScope(role, role + " all"));
 		}
 
 		List<GrantType> grantTypes = new ArrayList();
@@ -112,7 +111,7 @@ public class StartApplication extends SpringBootServletInitializer {
 		return new OAuth("oauth2schema", authorizationScopeList, grantTypes);
 
 	}
-	
+
 	private SecurityContext securityContext() {
 		return SecurityContext.builder().securityReferences(defaultAuth()).forPaths(PathSelectors.ant("/**")).build();
 	}
@@ -122,10 +121,10 @@ public class StartApplication extends SpringBootServletInitializer {
 		String[] roles = outhRoles.split(",");
 		final AuthorizationScope[] authorizationScopes = new AuthorizationScope[roles.length];
 		int i = 0;
-		for(String role : roles) {
-			authorizationScopes[i++] = new AuthorizationScope(role, role+" all");
+		for (String role : roles) {
+			authorizationScopes[i++] = new AuthorizationScope(role, role + " all");
 		}
-		
+
 		return Collections.singletonList(new SecurityReference("oauth2schema", authorizationScopes));
 	}
 
@@ -135,11 +134,9 @@ public class StartApplication extends SpringBootServletInitializer {
 	}
 
 	private ApiInfo apiInfo() {
-		return new ApiInfoBuilder().title("User Management API").description("")
-				.termsOfServiceUrl("https://www.sspusermgmt.com/api")
-				.contact(new Contact("Srinivas Shettigar", "http://www.sspusermgmt.com",
-						"sspusermgmt@example.com"))
-				.license("Open Source").licenseUrl("https://www.example.com").version("1.0.0").build();
+		return new ApiInfoBuilder().title("User Management API").description("").termsOfServiceUrl("https://www.sspusermgmt.com/api")
+				.contact(new Contact("Srinivas Shettigar", "http://www.sspusermgmt.com", "sspusermgmt@example.com")).license("Open Source")
+				.licenseUrl("https://www.example.com").version("1.0.0").build();
 	}
 
 	@Bean

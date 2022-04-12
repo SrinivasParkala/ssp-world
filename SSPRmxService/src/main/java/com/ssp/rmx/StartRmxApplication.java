@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
@@ -30,6 +31,11 @@ public class StartRmxApplication extends SpringBootServletInitializer {
 		SpringApplication.run(StartRmxApplication.class, args);
 	}
 
+	@Override
+	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+		return application.sources(StartRmxApplication.class);
+	}
+	
 	@Bean
   public RestTemplate getRestTemplate() {
      return new RestTemplate();

@@ -23,15 +23,17 @@ public class ServiceInterceptor implements HandlerInterceptor {
 	}
 
 	private void retrieveTenantAndUser(HttpServletRequest request) {
-		String principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
-		int index = principal.indexOf(USER_SEPARATOR);
-
-		if (index == -1) {
-			throw new UsernameNotFoundException("Username and tenanat must be provided");
+		if( SecurityContextHolder.getContext().getAuthentication() != null ) {
+			String principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+			int index = principal.indexOf(USER_SEPARATOR);
+	
+			if (index == -1) {
+				throw new UsernameNotFoundException("Username and tenanat must be provided");
+			}
+	
+			request.setAttribute(ServiceInterceptor.TENANT_ID, principal.substring(0, index));
+			request.setAttribute(ServiceInterceptor.USER, principal.substring(index + 1, principal.length()));
 		}
-
-		request.setAttribute(ServiceInterceptor.TENANT_ID, principal.substring(0, index));
-		request.setAttribute(ServiceInterceptor.USER, principal.substring(index + 1, principal.length()));
 	}
 
 	@Override

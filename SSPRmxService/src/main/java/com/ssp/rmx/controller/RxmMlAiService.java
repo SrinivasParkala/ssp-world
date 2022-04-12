@@ -30,14 +30,14 @@ public class RxmMlAiService {
 	private String pythonServiceUrl;
 
 	@RequestMapping(value = "/getOAuthDetails", method = RequestMethod.GET)
-	@PreAuthorize("hasAuthority('tenantadmin')")
+	@PreAuthorize("hasAuthority('superuser')")
   public ResponseEntity<Principal> get(final Principal principal, final HttpServletRequest request) {
 			System.out.println("Tenant:"+request.getAttribute(ServiceInterceptor.TENANT_ID)+"\tUser:"+request.getAttribute(ServiceInterceptor.USER));
       return ResponseEntity.ok(principal);
   }
 	
 	@RequestMapping(value = "/mlService", method = RequestMethod.GET)
-  @PreAuthorize("hasAuthority('tenantadmin')")
+  @PreAuthorize("hasAnyAuthority('tenantadmin','superuser')")
   public String getMLService(final HttpServletRequest request) {
 		HttpHeaders headers = new HttpHeaders();
     headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
