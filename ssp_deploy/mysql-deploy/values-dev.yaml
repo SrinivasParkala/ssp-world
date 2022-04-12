@@ -1,0 +1,13 @@
+# Global Settings
+global:
+  sharedVolumeConfiguration:
+    properties:
+      storageSize: "40Gi" # storage size in Persistent Volume Claim (PVC)
+
+mysql:
+  image: mysql
+  imageTag: 5.6
+  port: 3306
+  strategy: Recreate
+  user: d2VsY29tZTJzc3AK
+  password: V2VsY29tZTJAc3Nw # echo -n <password> | base64

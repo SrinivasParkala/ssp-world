@@ -1,0 +1,13 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: python-service
+  namespace: {{ .Release.Namespace }}
+spec:
+  type: ClusterIP      
+  selector:
+    server: python
+  ports:
+    - targetPort: {{ .Values.springboot.port }}
+      port: {{ .Values.springboot.port }}
+

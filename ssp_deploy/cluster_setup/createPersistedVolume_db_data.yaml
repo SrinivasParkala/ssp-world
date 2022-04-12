@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: ssp-pv-dbdata
+  labels:
+    type: local_db_data
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 90Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/root/ssp_deploy/storage/dbdata/data"
+

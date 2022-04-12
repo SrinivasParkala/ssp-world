@@ -1,0 +1,8 @@
+apiVersion: v1
+appVersion: 1.0.0
+description: Deploy Python rest
+keywords:
+- amd64
+kubeVersion: '>=1.9.0'
+name: pythonrest-deploy
+version: 0.1.001
