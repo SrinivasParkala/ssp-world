@@ -1,7 +1,0 @@
-Manifest-Version: 1.0
-Build-Jdk-Spec: 11
-Implementation-Title: SSPUserManagement
-Implementation-Version: 0.0.1-SNAPSHOT
-Main-Class: com.ssp.usermgmt.StartApplication
-Created-By: Maven Integration for Eclipse
-

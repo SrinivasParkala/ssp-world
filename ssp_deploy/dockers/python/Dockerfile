@@ -1,26 +1,20 @@
 #Using lightweight alpine image
-FROM python:3.8.3-alpine
+FROM tiangolo/uwsgi-nginx-flask:python3.8
 
-# Installing packages
-RUN apk update
-RUN apk --no-cache add curl
 RUN pip install --upgrade pip
 
-RUN adduser -D puser
+RUN adduser puser
 USER puser
 WORKDIR /home/puser
 
-ENV PATH="/home/puser/.local/bin:${PATH}"
-RUN pip install pipenv
-RUN pip install python-dotenv
-RUN pip install python-jose
-
 # Defining working directory and adding source code
-COPY --chown=puser:puser Pipfile Pipfile.lock bootstrap.sh ./
-COPY --chown=puser:puser cashman ./cashman
+COPY --chown=puser:puser bootstrap.sh ./
+COPY --chown=puser:puser mlPredictService ./mlPredictService
+COPY --chown=puser:puser requirements.txt ./
 
 # Install API dependencies
-RUN pipenv install
+#RUN pipenv install --verbose
+RUN pip install -r ./requirements.txt
 
 RUN chmod +x /home/puser/bootstrap.sh
 

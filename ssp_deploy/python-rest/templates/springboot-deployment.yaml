@@ -38,7 +38,7 @@ spec:
           name: {{ .Values.springboot.image }}
         volumeMounts:
         - name: python-persistent-storage
-          mountPath: /usr/app
+          mountPath: /usr/modelstore
       volumes:
       - name: python-persistent-storage
         persistentVolumeClaim:

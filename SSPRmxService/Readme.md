@@ -102,7 +102,7 @@ G. To test
 	
 	2. curl --location --request GET 'https://pyrazole1.fyre.ibm.com:30006/sspService/getOAuthDetails' -H 'Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NDk3NjkxMDMsInVzZXJfbmFtZSI6InN5c3RlbV9zc2hldHRpZ2FyNzVAZ21haWwiLCJhdXRob3JpdGllcyI6WyJzdXBlcnVzZXIiXSwianRpIjoiZTJiYzk3ZjktMTVmOS00OWUwLTkxNTMtNWRhODZmMTJlNzJiIiwiY2xpZW50X2lkIjoic3NwX2RvbWFpbiIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdfQ.h6Q36IZHPZzcoSDp0dMLIoK-HQtStMbBmPzen3xbxDmbQpVV3koTshBTPP9R6HOh_csKIo_7qNdL9ypal3UL51s6_3et0QSD9gE_25CRUecrvc_axAJIfvS1UkD6SAAOLrrXhXf-QP9zkRQtbOPDu22RBQgReTHf2NqKiS9dOMV-2JzLoiIoB9oy6MLR0U7jAYttsUPmp1RCLKjKIjVVCjl1_qwPzNryB6tcFVipcMyrmIjQtY8TFePY0RZGuiY9MIXtXRUybqYGPt7ltIoV7KGksfJSpn8lbG1xnmEHr5KvZZSsT3200WlRZnbJtFUXhjcE5nT1qfeipifv-E5sHw' -k
 	
-	3. https://localhost:1026/swagger-ui.html 
+	3. https://pyrazole1.fyre.ibm.com:30006/swagger-ui.html 
 
 
 H. Git Clone Steps

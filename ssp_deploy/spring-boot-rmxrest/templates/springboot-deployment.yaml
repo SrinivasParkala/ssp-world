@@ -29,6 +29,8 @@ spec:
              cpu: 1
              memory: 3Gi
         env:
+        - name: SPRING_BOOT_MODEL_PATH
+          value: {{ .Values.springboot.modelpath }}
         - name: SPRING_BOOT_MAIN_JAR
           value: {{ .Values.springboot.mainjar }}
         - name: SPRING_BOOT_APP_HOME
@@ -39,9 +41,14 @@ spec:
         volumeMounts:
         - name: oauth-persistent-storage
           mountPath: /usr/app
+        - name: python-persistent-storage
+          mountPath: /usr/modelstore
       volumes:
       - name: oauth-persistent-storage
         persistentVolumeClaim:
           claimName: rmxml-pv-claim
+      - name: python-persistent-storage
+        persistentVolumeClaim:
+          claimName: python-pv-claim
       imagePullSecrets:
       - name: regcred
