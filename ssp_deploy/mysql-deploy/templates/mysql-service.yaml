@@ -1,0 +1,15 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: mysql-service
+  namespace: {{ .Release.Namespace }}
+spec:
+  type: NodePort      
+  selector:
+    db: mysql
+  ports:
+  - protocol: TCP
+    port: {{ .Values.mysql.port }}
+    targetPort: {{ .Values.mysql.port }}
+    nodePort: 30008
+

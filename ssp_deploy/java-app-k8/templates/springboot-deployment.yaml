@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: java-server
+  namespace: {{ .Release.Namespace }}
+  labels:
+    server: java
+spec:
+  selector:
+    matchLabels:
+      server: java
+      tier: server
+  strategy:
+    type: {{ .Values.java.strategy }}
+  template:
+    metadata:
+      labels:
+        server: java
+        tier: server
+    spec:
+      containers:
+      - image: {{ .Values.java.image }}:{{ .Values.java.imageTag }}
+        name: {{ .Values.java.image }}
+        resources:
+           requests:
+             cpu: 500m
+             memory: 1Gi
+           limits:
+             cpu: 1
+             memory: 3Gi
+        env:
+        - name: JAVA_MAIN_CLASS
+          value: {{ .Values.java.mainclass }}
+        - name: SPRING_BOOT_APP_HOME
+          value: {{ .Values.java.apphome }}
+        volumeMounts:
+        - name: java-app-storage
+          mountPath: /usr/app
+      volumes:
+      - name: java-app-storage
+        persistentVolumeClaim:
+          claimName: local_java_app
+      imagePullSecrets:
+      - name: regcred

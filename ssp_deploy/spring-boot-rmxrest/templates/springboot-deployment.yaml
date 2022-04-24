@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rmxml-server
+  namespace: {{ .Release.Namespace }}
+  labels:
+    server: rmxml
+spec:
+  selector:
+    matchLabels:
+      server: rmxml
+      tier: server
+  strategy:
+    type: {{ .Values.springboot.strategy }}
+  template:
+    metadata:
+      labels:
+        server: rmxml
+        tier: server
+    spec:
+      containers:
+      - image: {{ .Values.springboot.image }}:{{ .Values.springboot.imageTag }}
+        name: {{ .Values.springboot.image }}
+        resources:
+           requests:
+             cpu: 500m
+             memory: 1Gi
+           limits:
+             cpu: 1
+             memory: 3Gi
+        env:
+        - name: SPRING_BOOT_MODEL_PATH
+          value: {{ .Values.springboot.modelpath }}
+        - name: SPRING_BOOT_MAIN_JAR
+          value: {{ .Values.springboot.mainjar }}
+        - name: SPRING_BOOT_APP_HOME
+          value: {{ .Values.springboot.apphome }}
+        ports:
+        - containerPort: {{ .Values.springboot.port }}
+          name: {{ .Values.springboot.image }}
+        volumeMounts:
+        - name: oauth-persistent-storage
+          mountPath: /usr/app
+        - name: python-persistent-storage
+          mountPath: /usr/modelstore
+      volumes:
+      - name: oauth-persistent-storage
+        persistentVolumeClaim:
+          claimName: rmxml-pv-claim
+      - name: python-persistent-storage
+        persistentVolumeClaim:
+          claimName: python-pv-claim
+      imagePullSecrets:
+      - name: regcred

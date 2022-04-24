@@ -1,0 +1,6 @@
+#!/bin/sh
+APP_HOME=$JAVA_APP_HOME
+MAIN_CLASS=$JAVA_MAIN_CLASS
+echo $APP_HOME
+echo $MAIN_JAR
+java -cp $APP_HOME/lib/* $MAIN_CLASS

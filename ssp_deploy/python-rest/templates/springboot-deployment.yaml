@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: python-server
+  namespace: {{ .Release.Namespace }}
+  labels:
+    server: python
+spec:
+  selector:
+    matchLabels:
+      server: python
+      tier: server
+  strategy:
+    type: {{ .Values.springboot.strategy }}
+  template:
+    metadata:
+      labels:
+        server: python
+        tier: server
+    spec:
+      containers:
+      - image: {{ .Values.springboot.image }}:{{ .Values.springboot.imageTag }}
+        name: {{ .Values.springboot.image }}
+        resources:
+           requests:
+             cpu: 500m
+             memory: 1Gi
+           limits:
+             cpu: 1
+             memory: 3Gi
+        env:
+        - name: SPRING_BOOT_MAIN_JAR
+          value: {{ .Values.springboot.mainjar }}
+        - name: SPRING_BOOT_APP_HOME
+          value: {{ .Values.springboot.apphome }}
+        ports:
+        - containerPort: {{ .Values.springboot.port }}
+          name: {{ .Values.springboot.image }}
+        volumeMounts:
+        - name: python-persistent-storage
+          mountPath: /usr/modelstore
+      volumes:
+      - name: python-persistent-storage
+        persistentVolumeClaim:
+          claimName: python-pv-claim
+      imagePullSecrets:
+      - name: regcred

@@ -1,0 +1,11 @@
+global:
+  sharedVolumeSpringConfiguration:
+    properties:
+      storageSize: "5Gi" # storage size in Persistent Volume Claim (PVC)
+
+java:
+  image: javaimage
+  imageTag: v1
+  mainclass: com.ibm.con.DockerJavaEntryClass
+  apphome: /usr/app
+  strategy: Recreate
