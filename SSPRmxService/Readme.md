@@ -104,7 +104,7 @@ G. To test
 	
 	3. https://pyrazole1.fyre.ibm.com:30006/swagger-ui.html 
 
-4. curl --location --request POST 'https://pyrazole1.fyre.ibm.com:30006/sspService/rmxApis/v1.0/predictValues' -H 'Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NTA3OTQ5NzYsInVzZXJfbmFtZSI6InN5c3RlbV9zc2hldHRpZ2FyNzVAZ21haWwiLCJhdXRob3JpdGllcyI6WyJzdXBlcnVzZXIiXSwianRpIjoiNGQyNjRjMzgtOWQzOC00ZGU5LTllNDctMzlhNWFhOWQxYmM4IiwiY2xpZW50X2lkIjoic3NwX2RvbWFpbiIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdfQ.ROvZ1DYfS7QF-QzeKjq1LqbY750DUuFcM-QEB2HENT5lsYkL40wuQSiNIH9XX-rpOJXK_1fNEr8kYYj1KiIUkAmq1oMBUCQ_V-m_j7m6dLmRhndPOIr6EEMUPVqr0yoOLc8_Mpy0GftsEPQE9_x-jzptYu4XRInjroi28zXYhuSxnb01rccW3X-m858hsJKy4XoetCk9GYfT1Cb0gm9ArltGXyyttTaI9cJarRsMuj0lRNJyDIwWbbzQkLNONDv9CkiywMncRBABkjRINMQoL0sIiND9lGP_7atnL5i8jiVBonEccrRiBWdcGRY2xLsr3zlGZVhyVSg7dAzMSPusHg' -H 'Content-Type: application/json' -d @/tmp/data.json -k
+	4. curl --location --request POST 'https://pyrazole1.fyre.ibm.com:30006/sspService/rmxApis/v1.0/predictValues' -H 'Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NTA3OTQ5NzYsInVzZXJfbmFtZSI6InN5c3RlbV9zc2hldHRpZ2FyNzVAZ21haWwiLCJhdXRob3JpdGllcyI6WyJzdXBlcnVzZXIiXSwianRpIjoiNGQyNjRjMzgtOWQzOC00ZGU5LTllNDctMzlhNWFhOWQxYmM4IiwiY2xpZW50X2lkIjoic3NwX2RvbWFpbiIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdfQ.ROvZ1DYfS7QF-QzeKjq1LqbY750DUuFcM-QEB2HENT5lsYkL40wuQSiNIH9XX-rpOJXK_1fNEr8kYYj1KiIUkAmq1oMBUCQ_V-m_j7m6dLmRhndPOIr6EEMUPVqr0yoOLc8_Mpy0GftsEPQE9_x-jzptYu4XRInjroi28zXYhuSxnb01rccW3X-m858hsJKy4XoetCk9GYfT1Cb0gm9ArltGXyyttTaI9cJarRsMuj0lRNJyDIwWbbzQkLNONDv9CkiywMncRBABkjRINMQoL0sIiND9lGP_7atnL5i8jiVBonEccrRiBWdcGRY2xLsr3zlGZVhyVSg7dAzMSPusHg' -H 'Content-Type: application/json' -d @/tmp/data.json -k
 
         Payload Sample:
 
@@ -127,11 +127,11 @@ git clone https://github.com/SrinivasParkala/ssp-world.git
 su - srinipu
 cd /Users/srinipu/projects/ssp-world
 
-git checkout ssp_branch_aug20
-git add .
-git config --global user.email "rash.srini@gmail.com"
-git commit -m "ssp service and client"
-git push
+i. git checkout ssp_branch_aug20
+ii. git add .
+iii. git config --global user.email "rash.srini@gmail.com"
+iv. git commit -m "ssp service and client"
+v. git push
 
 git user: rash.srini@gmail.com	
 
