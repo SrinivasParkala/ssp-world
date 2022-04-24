@@ -127,7 +127,7 @@ git clone https://github.com/SrinivasParkala/ssp-world.git
 su - srinipu
 cd /Users/srinipu/projects/ssp-world
 
-1. git checkout ssp_branch_aug20
+1. git checkout <branch_name>
 2. git add .
 3. git config --global user.email "rash.srini@gmail.com"
 4. git commit -m "ssp service and client"
