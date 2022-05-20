@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: react-server
+  namespace: {{ .Release.Namespace }}
+  labels:
+    server: react
+spec:
+  selector:
+    matchLabels:
+      server: react
+      tier: server
+  strategy:
+    type: {{ .Values.springboot.strategy }}
+  template:
+    metadata:
+      labels:
+        server: react
+        tier: server
+    spec:
+      containers:
+      - image: {{ .Values.springboot.image }}:{{ .Values.springboot.imageTag }}
+        name: {{ .Values.springboot.image }}
+        resources:
+           requests:
+             cpu: 500m
+             memory: 1Gi
+           limits:
+             cpu: 1
+             memory: 3Gi
+        ports:
+        - containerPort: {{ .Values.springboot.port }}
+          name: {{ .Values.springboot.image }}
+        volumeMounts:
+        - name: react-persistent-storage
+          mountPath: /usr/apps
+      volumes:
+      - name: react-persistent-storage
+        persistentVolumeClaim:
+          claimName: react-pv-claim
+      imagePullSecrets:
+      - name: regcred

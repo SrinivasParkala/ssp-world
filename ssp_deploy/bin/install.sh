@@ -9,3 +9,6 @@ echo Install rmxMl
 
 echo Install Python
 ./createPythonPod.sh
+
+echo Install ReactUI
+./createReactPod.sh

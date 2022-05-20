@@ -1,0 +1,2 @@
+ssl_certificate /usr/apps/certs/ssl/nginx-selfsigned.crt;
+ssl_certificate_key /usr/apps/certs/ssl/nginx-selfsigned.key;
